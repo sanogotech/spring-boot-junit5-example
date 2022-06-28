@@ -53,6 +53,7 @@ public class AuthorResourceRestTest {
     	AuthorDto authorDto = new AuthorDto("test@example.com","Test","Surname");
         //given
         Long existingAuthorId = 1L;
+        authorDto.setId(existingAuthorId);
         HttpEntity<AuthorDto> request = new HttpEntity<>(authorDto);
 
         //when

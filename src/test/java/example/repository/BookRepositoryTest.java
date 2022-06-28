@@ -38,12 +38,30 @@ public class BookRepositoryTest {
 
         Author author = authorRepository.findById(0L).orElseGet(
                 () -> {
-                    Author authorAux = Author.builder().email("test@example.com").firstName("Test").lastName("Surname").build();
+                	Author authorAux = new Author();
+                	authorAux.setEmail("test@example.com");
+                	authorAux.setFirstName("Test");
+                	authorAux.setLastName("Surname");
+              
                     return authorRepository.save(authorAux);
                 });
 
-        book1 = Book.builder().title("title1").description("bla bla").genre("Drama").price(BigDecimal.TEN).author(author).build();
-        book2 = Book.builder().title("title2").description("bla bla bla").genre("Comedy").price(BigDecimal.TEN).author(author).build();
+        book1 = new Book();
+        book1.setTitle("title1");
+        book1.setDescription("bla bla");
+        book1.setGenre("Drama");
+        book1.setPrice(BigDecimal.TEN);
+        book1.setAuthor(author);
+        
+        book2 = new Book();
+        book2.setTitle("title2");
+        book2.setDescription("bla bla bla");
+        book2.setGenre("Drama2");
+        book2.setPrice(BigDecimal.TEN);
+        book2.setAuthor(author);
+        
+        
+       
 
         initialCount = bookRepository.count();
         bookRepository.saveAll(Arrays.asList(book1, book2));

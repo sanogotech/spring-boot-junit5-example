@@ -41,15 +41,35 @@ public class DeleteInRelationshipsTest {
 
         authorInitialCount = authorRepository.count();
 
-        Author mb1 = Author.builder().email("test1@example.com").firstName("Test1").lastName("Surname1").build();
+    	Author mb1 = new Author();
+    	mb1.setEmail("test1@example.com");
+    	mb1.setFirstName("Test1");
+    	mb1.setLastName("Surname1");
+        
         author1 = authorRepository.save(mb1);
 
-        Author mb2 = Author.builder().email("test2@example.com").firstName("Test2").lastName("Surname2").build();
+        Author mb2 = new Author();
+    	mb2.setEmail("test1@example.com");
+    	mb2.setFirstName("Test1");
+    	mb2.setLastName("Surname1");
+       
         author2 = authorRepository.save(mb2);
 
-        book1 = Book.builder().description("example1").title("test1").genre("genre1").price(BigDecimal.TEN).author(author1).build();
-        book2 = Book.builder().description("example2").title("test2").genre("genre2").price(BigDecimal.TEN).author(author2).build();
+        book1 = new Book();
+        book1.setTitle("test1");
+        book1.setDescription("example1");
+        book1.setGenre("example1");
+        book1.setPrice(BigDecimal.TEN);
+        book1.setAuthor(author1);
+        
 
+        book2 = new Book();
+        book2.setTitle("test2");
+        book2.setDescription("example2");
+        book2.setGenre("example2");
+        book2.setPrice(BigDecimal.TEN);
+        book2.setAuthor(author2);
+  
         bookInitialCount = bookRepository.count();
         bookRepository.saveAll(Arrays.asList(book1, book2));
     }

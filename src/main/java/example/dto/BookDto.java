@@ -32,6 +32,33 @@ public class BookDto {
 		this.price =price;
 		this.author = defaultAuthor;
 	}
+	
+	public BookDto(String  description, String genre, String  title, BigDecimal price, AuthorDto defaultAuthor) {
+	
+		this.description = description;
+		this.genre = genre;
+		this.title =title;
+		this.price =price;
+		this.author = defaultAuthor;
+	}
+	
+	public BookDto(Long id,String  description, String genre, String  title, BigDecimal price) {
+		this.id =id;
+		this.description = description;
+		this.genre = genre;
+		this.title =title;
+		this.price =price;
+	
+	}
+	
+	public BookDto(String  description, String genre, String  title, BigDecimal price) {
+		this.id =id;
+		this.description = description;
+		this.genre = genre;
+		this.title =title;
+
+	
+	}
 
 	public BookDto() {
 		// TODO Auto-generated constructor stub

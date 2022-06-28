@@ -27,6 +27,12 @@ public class AuthorDto {
 		this.firstName =firstName;
 		this.lastName = lastName;
 	}
+	
+	public AuthorDto(String email, String lastName) {
+		this.email =email;
+
+		this.lastName = lastName;
+	}
 
 	public AuthorDto() {
 		// TODO Auto-generated constructor stub

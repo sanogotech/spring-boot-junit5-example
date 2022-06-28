@@ -83,7 +83,7 @@ public class BookResourceRestTest {
         //given
         AuthorDto defaultAuthor = new AuthorDto();
         defaultAuthor.setId(1L);
-        BookDto  bookDto = new  BookDto(1L,"example","Romance","title1",BigDecimal.TEN,defaultAuthor);
+        BookDto  bookDto = new  BookDto("example","Romance","title1",BigDecimal.TEN,defaultAuthor);
         HttpEntity<BookDto> request = new HttpEntity<>(bookDto);
 
         //when

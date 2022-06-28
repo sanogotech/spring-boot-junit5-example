@@ -63,7 +63,7 @@ public class AuthorResourceTest {
     public void createIncompleteBookShouldReturn400() throws Exception {
 
         //given
-    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","S@#¢∞name");
+    	AuthorDto authorDto = new AuthorDto("test_example.com","S@#¢∞name");
        
         String json = objectMapper.writeValueAsString(authorDto);
 

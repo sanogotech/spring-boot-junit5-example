@@ -37,9 +37,14 @@ public class AuthorServiceTest {
     void givenAuthorData_whenCreateAuthor_ThenAuthorIdReturned() {
 
         //given
-        AuthorDto authorDto1 = AuthorDto.builder().email("test@example.com").firstName("Test").lastName("Surname").build();
-        Author author1 = Author.builder().id(0L).email("test@example.com").firstName("Test").lastName("Surname").build();
-
+        AuthorDto authorDto1 = new AuthorDto("test@example.com","Test","Surname");
+        Author author1 = new Author();
+        author1.setId(0L);    
+        author1.setEmail("test@example.com");
+        author1.setFirstName("Test");
+        author1.setLastName("Surname");
+        
+        
         //when
         when(authorRepositoryMock.save(any(Author.class))).thenReturn(author1);
         Long authorId1 = authorService.create(authorDto1);
@@ -54,8 +59,12 @@ public class AuthorServiceTest {
     void givenAdIncompleteData_whenCreateAd_ThenExceptionIsThrown() {
 
         //given
-        AuthorDto authorDto1 = AuthorDto.builder().email("test@example.com").lastName("Surname").build();
-        Author author1 = Author.builder().email("test@example.com").lastName("Surname").build();
+    	 AuthorDto authorDto1 = new AuthorDto("test@example.com","Test","Surname");
+        
+        Author author1 = new Author();
+        author1.setEmail("test@example.com");
+        author1.setLastName("Surname");
+        
         String errorMsg = "Unable to save an incomplete entity : "+authorDto1;
 
         //when
@@ -72,7 +81,14 @@ public class AuthorServiceTest {
 
         //given
         long existingAuthorId = 0L;
-        Author author1 = Author.builder().id(existingAuthorId).email("test@example.com").firstName("Test").lastName("Surname").build();
+       
+
+        Author author1= new Author();
+        author1.setId(existingAuthorId);
+        author1.setEmail("test@example.com");
+        author1.setFirstName("Test");
+        author1.setLastName("Surname");
+        
         when(authorRepositoryMock.findById(existingAuthorId)).thenReturn(Optional.of(author1));
 
         //when

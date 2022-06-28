@@ -42,7 +42,15 @@ public class BookServiceTest {
 
         //given
         long existingBookId = 0L;
-        Book book1 = Book.builder().id(0L).description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
+  
+        Book book1 = new Book();
+        book1.setId(existingBookId);
+        book1.setTitle("title");
+        book1.setDescription("example");
+        book1.setGenre("Terror");
+        book1.setPrice(BigDecimal.TEN);
+  
+        
         when(bookRepositoryMock.findById(existingBookId)).thenReturn(Optional.of(book1));
 
         //when
@@ -76,7 +84,13 @@ public class BookServiceTest {
 
         //given
         long existingBookId = 0L;
-        Book book1 = Book.builder().id(existingBookId).description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
+        Book book1 = new Book();
+        book1.setId(existingBookId);
+        book1.setTitle("title");
+        book1.setDescription("example");
+        book1.setGenre("Terror");
+        book1.setPrice(BigDecimal.TEN);
+  
         when(bookRepositoryMock.findAll()).thenReturn(Arrays.asList(book1));
 
         //when
@@ -93,8 +107,15 @@ public class BookServiceTest {
     void givenBookData_whenCreateBook_ThenBookIdReturned() {
 
         //given
-        BookDto bookDto1 = BookDto.builder().description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
-        Book book1 = Book.builder().id(0L).description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
+       
+        BookDto  bookDto1 = new  BookDto(1L,"example","Terror","title",BigDecimal.TEN);
+        Book book1 = new Book();
+        book1.setId(0L);
+        book1.setTitle("title");
+        book1.setDescription("example");
+        book1.setGenre("Terror");
+        book1.setPrice(BigDecimal.TEN);
+  
 
         //when
         when(bookRepositoryMock.save(any(Book.class))).thenReturn(book1);
@@ -110,12 +131,18 @@ public class BookServiceTest {
     void givenBookIncompleteData_whenCreateBook_ThenExceptionIsThrown() {
 
         //given
-        BookDto bookDto1 = BookDto.builder().description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
-        Book Book1 = Book.builder().description("example").genre("Terror").title("title").price(BigDecimal.TEN).build();
+       
+        BookDto  bookDto1 = new  BookDto("example","Terror","title",BigDecimal.TEN);
+        Book book1 = new Book();
+        book1.setTitle("title");
+        book1.setDescription("example");
+        book1.setGenre("Terror");
+        book1.setPrice(BigDecimal.TEN);
+        
         String errorMsg = "Unable to save an incomplete entity : "+bookDto1;
 
         //when
-        when(bookRepositoryMock.save(Book1)).thenThrow(new RuntimeException(errorMsg));
+        when(bookRepositoryMock.save(book1)).thenThrow(new RuntimeException(errorMsg));
         RuntimeException throwException = assertThrows(RuntimeException.class, () ->  bookService.create(bookDto1));
 
         // then
