@@ -33,8 +33,10 @@ public class AuthorResourceRestTest {
     @DisplayName("when POST a new Author, then returns 201")
     public void givenNewAuthor_whenPostAuthor_thenReturns201() {
 
+    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","Surname");
+    	
         //given
-        HttpEntity<AuthorDto> request = new HttpEntity<>(AuthorDto.builder().email("test@example.com").firstName("Test").lastName("Surname").build());
+        HttpEntity<AuthorDto> request = new HttpEntity<>(authorDto);
 
         //when
         ResponseEntity<Void> responseEntity = restTemplate.postForEntity("/api/v1/authors", request, Void.class);
@@ -48,9 +50,10 @@ public class AuthorResourceRestTest {
     @DisplayName("when POST an existing Author id, then returns 422")
     public void givenExistingAuthorId_whenPostAuthor_thenReturns422() {
 
+    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","Surname");
         //given
         Long existingAuthorId = 1L;
-        HttpEntity<AuthorDto> request = new HttpEntity<>(AuthorDto.builder().id(existingAuthorId).email("test@example.com").firstName("Test").lastName("Surname").build());
+        HttpEntity<AuthorDto> request = new HttpEntity<>(authorDto);
 
         //when
         ResponseEntity<Void> responseEntity = restTemplate.postForEntity("/api/v1/authors", request, Void.class);

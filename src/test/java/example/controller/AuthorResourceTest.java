@@ -47,7 +47,7 @@ public class AuthorResourceTest {
     public void createAuthorShouldReturn201() throws Exception {
 
         //given
-        AuthorDto authorDto = AuthorDto.builder().email("test@example.com").firstName("Test").lastName("Surname").build();
+    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","Surname");
         String json = objectMapper.writeValueAsString(authorDto);
         when(this.authorService.create(authorDto)).thenReturn(0L);
 
@@ -63,7 +63,8 @@ public class AuthorResourceTest {
     public void createIncompleteBookShouldReturn400() throws Exception {
 
         //given
-        AuthorDto authorDto = AuthorDto.builder().email("test_examplecom").lastName("S@#¢∞name").build();
+    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","S@#¢∞name");
+       
         String json = objectMapper.writeValueAsString(authorDto);
 
         //when-then
@@ -85,7 +86,8 @@ public class AuthorResourceTest {
 
         //given
         long existingAuthorId = 0L;
-        AuthorDto author1 = AuthorDto.builder().id(existingAuthorId).email("test@example.com").firstName("Test").lastName("Surname").build();
+        AuthorDto author1 = new AuthorDto("test@example.com","Test","Surname");
+        author1.setId(existingAuthorId);
         String json = objectMapper.writeValueAsString(author1);
         when(this.authorService.create(author1)).thenThrow(new DuplicatedEntityException());
 
