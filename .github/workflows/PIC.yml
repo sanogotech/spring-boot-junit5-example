@@ -10,7 +10,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  Compile:
 
     runs-on: ubuntu-latest
 
@@ -25,7 +25,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B compile --file pom.xml
   
-  Package:
+  BuildTestPackage:
 
     runs-on: ubuntu-latest
 
