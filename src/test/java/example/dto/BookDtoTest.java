@@ -21,7 +21,11 @@ public class BookDtoTest {
     public void whenConvertBookEntityToBookDto_thenCorrect() {
 
         //given
-        Book book = Book.builder().id(1L).title("Example").genre("Comedy").build();
+    	Book book = new Book();
+    	book.setId(1L);
+    	book.setTitle("Example");
+    	book.setGenre("Comedy");
+  
 
         //when
         BookDto bookDto = modelMapper.map(book, BookDto.class);

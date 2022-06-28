@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -96,8 +97,12 @@ public class BookResourceTest {
     public void createBookShouldReturn201() throws Exception {
 
         //given
-        AuthorDto defaultAuthor = AuthorDto.builder().id(0L).build();
-        BookDto book = BookDto.builder().description("example").genre("Drama").title("test").author(defaultAuthor).build();
+     
+        AuthorDto defaultAuthor = new AuthorDto();
+        defaultAuthor.setId(0L);
+        BookDto  book = new  BookDto(0L,"example","Drame","test",BigDecimal.TEN,defaultAuthor);
+ 
+        
         String json = objectMapper.writeValueAsString(book);
         when(this.bookService.create(book)).thenReturn(0L);
 
@@ -113,9 +118,11 @@ public class BookResourceTest {
     public void createExistingBookIdShouldReturn422() throws Exception {
 
         //given
-        long existingBookId = 0L;
-        AuthorDto defaultAuthor = AuthorDto.builder().id(existingBookId).build();
-        BookDto book1 = BookDto.builder().description("example").genre("Drama").title("test").author(defaultAuthor).build();
+
+        AuthorDto defaultAuthor = new AuthorDto();
+        defaultAuthor.setId(0L);
+        BookDto  book1 = new  BookDto(0L,"example","Drame","test",BigDecimal.TEN,defaultAuthor);
+ 
         String json = objectMapper.writeValueAsString(book1);
         when(this.bookService.create(book1)).thenThrow(new DuplicatedEntityException());
 
@@ -131,7 +138,8 @@ public class BookResourceTest {
     public void createIncompleteBookShouldReturn400() throws Exception {
 
         //given
-        BookDto book1 = BookDto.builder().description("example").build();
+        BookDto book1 = new BookDto();
+        book1.setDescription("example");
         String json = objectMapper.writeValueAsString(book1);
 
         //when-then

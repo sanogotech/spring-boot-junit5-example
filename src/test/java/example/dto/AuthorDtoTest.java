@@ -21,7 +21,12 @@ public class AuthorDtoTest {
     public void whenConvertAuthorEntityToAuthorDto_thenCorrect() {
 
         //given
-        Author author = Author.builder().id(1L).email("test@example.com").firstName("Test").lastName("Surname").build();
+    	 Author author = new Author();
+    	 author.setId(1L);
+    	 author.setEmail("test@example.com");
+    	 author.setFirstName("Test");
+    	 author.setLastName("Surname");
+    	
 
         //when
         AuthorDto authorDto = modelMapper.map(author, AuthorDto.class);
@@ -38,7 +43,10 @@ public class AuthorDtoTest {
     public void whenConvertAuthorDtoToAuthorEntity_thenCorrect() {
 
         //given
-        AuthorDto authorDto = AuthorDto.builder().id(1L).email("test@example.com").firstName("Test").lastName("Surname").build();
+	 
+
+    	AuthorDto authorDto = new AuthorDto("test@example.com","Test","Surname");
+	        
 
         //when
         Author author = modelMapper.map(authorDto, Author.class);

@@ -81,8 +81,10 @@ public class BookResourceRestTest {
     public void givenNewBook_whenPostBook_thenReturns201() {
 
         //given
-        AuthorDto defaultAuthor = AuthorDto.builder().id(1L).build();
-        HttpEntity<BookDto> request = new HttpEntity<>(BookDto.builder().description("example").genre("Romance").title("title1").price(BigDecimal.TEN).author(defaultAuthor).build());
+        AuthorDto defaultAuthor = new AuthorDto();
+        defaultAuthor.setId(1L);
+        BookDto  bookDto = new  BookDto(1L,"example","Romance","title1",BigDecimal.TEN,defaultAuthor);
+        HttpEntity<BookDto> request = new HttpEntity<>(bookDto);
 
         //when
         ResponseEntity<Void> responseEntity = restTemplate.postForEntity("/api/v1/books", request, Void.class);
@@ -97,9 +99,10 @@ public class BookResourceRestTest {
     public void givenExistingBookId_whenPostBook_thenReturns422() {
 
         //given
-        Long existingBookId = 1L;
-        AuthorDto defaultAuthor = AuthorDto.builder().id(1L).build();
-        HttpEntity<BookDto> request = new HttpEntity<>(BookDto.builder().id(existingBookId).description("example").genre("Romance").title("title1").price(BigDecimal.TEN).author(defaultAuthor).build());
+        AuthorDto defaultAuthor = new AuthorDto();
+        defaultAuthor.setId(1L);
+        BookDto  bookDto = new  BookDto(1L,"example","Romance","title1",BigDecimal.TEN,defaultAuthor);
+        HttpEntity<BookDto> request = new HttpEntity<>(bookDto);
 
         //when
         ResponseEntity<Void> responseEntity = restTemplate.postForEntity("/api/v1/books", request, Void.class);
