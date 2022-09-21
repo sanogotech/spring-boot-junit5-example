@@ -26,7 +26,7 @@ jobs:
       run: mvn -B compile --file pom.xml
   
   BuildTestPackage:
-    needs: JacocoReport
+    needs: Compile
     runs-on: ubuntu-latest
 
     steps:
@@ -41,7 +41,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
   JacocoReport:
-    needs: Compile
+    needs: BuildTestPackage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
