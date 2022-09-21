@@ -80,3 +80,69 @@ open http://localhost:8080/swagger-ui.html
 ```
 ## Jenkins War
 - https://www.jenkins.io/doc/book/installing/war-file/
+
+##  Sample JUNIT Integration  Spring Boot
+```java
+
+/**
+ * 
+ */
+package example.service;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.util.List;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import example.dto.BookDto;
+
+/**
+ * @author SOULEYSANOGO
+ *
+ */
+@SpringBootTest
+class MyBookServiceTest {
+	
+	@Autowired
+	BookService  bookService;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@Test
+	void testListBook() {
+		
+		// Given
+		
+		// When
+		List<BookDto> listBook = bookService.list();
+		for (BookDto bookDto : listBook) {
+			System.out.println(bookDto.toString());
+		}
+		
+		//Then
+		assertFalse(listBook.isEmpty());
+		
+		
+	}
+
+}
+
+
+```
